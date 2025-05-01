@@ -11,4 +11,5 @@ COPY . /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Set the command to run the app using uvicorn
-CMD ["uvicorn", "BackEnd.main_fastapi:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD exec uvicorn main_fastapi:app --host 0.0.0.0 --port ${PORT}
+

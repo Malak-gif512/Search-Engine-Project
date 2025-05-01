@@ -4,6 +4,8 @@ from fastapi.responses import HTMLResponse
 from elasticsearch import Elasticsearch
 import requests
 import re
+import uvicorn
+import os
 
 app = FastAPI()
 
@@ -74,3 +76,7 @@ def fetch_page(url: str, q: str):
 
     # cd OneDrive\Desktop\BDProject\new
     # uvicorn main_fastapi:app --reload
+
+    if __name__ == "__main__":
+        port = int(os.environ.get("PORT", 8000))
+        uvicorn.run(app, host="0.0.0.0", port=port)

@@ -483,6 +483,9 @@
     <!-- Javascript -->
     <script>
         // Query
+
+        const baseURL = "https://search-engine-project-production.up.railway.app";
+
         async function performSearch() {
             const query = document.getElementById('searchQuery').value.trim();
             const resultsList = document.getElementById('results');
@@ -491,7 +494,7 @@
             if (!query) return;
 
             try {
-                const response = await fetch(`http://localhost:8000/search?q=${encodeURIComponent(query)}`);
+                const response = await fetch(`${baseURL}/search?q=${encodeURIComponent(query)}`);
                 const data = await response.json();
 
                 if (data.results.length === 0) {
@@ -506,7 +509,7 @@
 
 
                         // Link to the FastAPI highlight endpoint
-                        const link = `http://localhost:8000/fetch_page?url=${encodeURIComponent(item.url)}&q=${encodeURIComponent(query)}`;
+                        const link = `${baseURL}/fetch_page?url=${encodeURIComponent(item.url)}&q=${encodeURIComponent(query)}`;
                         li.innerHTML = `<a href="${link}" target="_blank">${item.url}</a> <span>➡️ Count: ${item.count}</span>`;
 
 

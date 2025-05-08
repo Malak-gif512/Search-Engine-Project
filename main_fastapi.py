@@ -37,7 +37,7 @@ def search(q: str = Query(..., min_length=1)):
                     "word": q  # Match the given word
                 }
             },
-            "size": 1  # We assume one document per word
+            "size": 5  # We assume one document per word
         }
     )
 
@@ -63,6 +63,17 @@ def fetch_page(url: str, q: str):
             html,
             flags=re.IGNORECASE
         )
+
+        # Highlight each word in the phrase separately, ensuring it is not already highlighted
+        if len(q.split()) > 1:
+            for word in q.split():
+                # Use a lookahead/lookbehind to ensure the word is not inside a <mark> tag
+                highlighted = re.sub(
+                    f"(?<!<mark style='background: yellow'>)({re.escape(word)})(?!</mark>)",
+                    r"<mark style='background: orange'>\1</mark>",
+                    highlighted,
+                    flags=re.IGNORECASE
+                )
 
 
         count = len(re.findall(f'({re.escape(q)})', html, flags=re.IGNORECASE))

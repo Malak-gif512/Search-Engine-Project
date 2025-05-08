@@ -1,8 +1,8 @@
 import json
 
 # Input and output file paths
-input_file = "out-search.txt"
-output_file = "search_word_bulk.ndjson"
+input_file = "c:/Users/Abo_Elalaa/OneDrive/Desktop/BDProject/finish/Search Engine Project/final-edit.txt"
+output_file = "final_edit_bulk.ndjson"
 
 ndjson_lines = []
 
